@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Joyfl</title>
+		
+		<style type="text/css" media="screen">
+			body {
+				margin: 0px;
+				overflow: hidden;
+				user-select: none;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#alert {
+				width: 630px;
+				height: 330px;
+				margin: auto;
+				background: url( "parking_alert.png" ) no-repeat;
+			}
+		</style>
+		
+		<script charset="utf-8">
+			var viewportWidth, viewportHeight;
+			var bgWidth, bgHeight;
+			
+			function onResize()
+			{
+				viewportWidth = window.innerWidth;
+				viewportHeight = window.innerHeight;
+				
+				bgWidth = parseInt( bg.style.width ) * viewportWidth / 100;
+				bgHeight = parseInt( bg.style.height ) * viewportHeight / 100;
+			}
+			
+			function onMouseMove( e )
+			{
+				var mouseX = window.event.clientX;
+				var mouseY = window.event.clientY;
+				
+				bg.style.left = ( mouseX * ( viewportWidth - bgWidth ) / viewportWidth ) + "px";
+				bg.style.top = ( mouseY * ( viewportHeight - bgHeight ) / viewportHeight ) + "px";
+				
+				container.style.left = ( mouseX * 10 / 640 ) + "px";
+				container.style.top = ( mouseY * 10 / 630 ) + "px";
+				
+				sign.style.margin = ( 15 + mouseY / 400 ) + "% auto";
+			}
+		</script>
+	</head>
+	<body onload="onResize()" onresize="onResize()" onmousemove="onMouseMove( event )">
+		<div id="bg" style="width: 110%; height: 110%; margin: auto; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: url( 'parking_bg.jpg' ) no-repeat center center; background-size: cover;"></div>
+		<div id="container" style="width: 630px; height: 620px; margin: auto; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+			<div id="alert"></div>
+			<div id="sign" style="width: 200px; height: 200px; background: url( 'parking_sign.png' ) no-repeat; margin: 20% auto;"></div>
+		</div>
+	</body>
+</html>
